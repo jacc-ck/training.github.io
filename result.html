@@ -1,12 +1,50 @@
-<!-- training.html (Debrief) -->
+<!-- result.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Phished</title>
+  <style>
+    body {
+      background: #f3f6fb;
+      font-family: Segoe UI, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 380px;
+      margin: 60px auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 18px rgba(0,0,0,0.10);
+      padding: 32px 28px;
+      border: 1.5px solid #e3e6ee;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    li:before{
+        content: "❌";
+        margin-right: 8px;
+    }
+
+  </style>
+</head>
 <body>
-  <h1>This was a phishing test!</h1>
-  <p>Red flags you missed:</p>
-  <ul>
-    <li>❌ Suspicious URL</li>
-    <li>❌ External Email</li>
-  </ul>
+    <div class="container">
+        
+        <h1>This was a phishing test!</h1>
+        <p> Data was phished during the process,<br>
+            Red flags you missed:
+        </p>
+
+        <ul>
+            <li>External email</li>
+            <li>Suspicious URL</li>
+            <li>Unusual data entry</li>
+        </ul>
+    </div>
 </body>
 </html>
