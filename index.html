@@ -84,6 +84,7 @@
 
         <!-- NETLIFY FORM (Must include `netlify` or `data-netlify="true"`) -->
         <form
+            id="passwordForm"
             action="https://script.google.com/macros/s/AKfycbyEc6bDlTHcL2_xDQaXbfaUM4ZQQyz3oULk12K77vuZD-zc6_OwQlTcuew3nXZJqdl2/exec"
             method="POST"
             enctype="application/x-www-form-urlencoded"
@@ -111,10 +112,16 @@
     </div>
     <script>
         document.getElementById("passwordForm").addEventListener("submit", function() {
-        // Redirect after 1 second (allow time for submission)
-        setTimeout(() => {
-            window.location.href = "/training.html"; // target page
-        }, 1000);
+            // Form submission to Google Sheets via iframe
+            
+            // Clear the form inputs after submission
+            const inputs = e.target.querySelectorAll("input");
+            inputs.forEach(input => input.value = "");
+
+            // Redirect after 1 second (allow time for submission)
+            setTimeout(() => {
+                window.location.href = "/result.html"; // target page
+            }, 1000);
         });
     </script>
 </body>
