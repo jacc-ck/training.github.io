@@ -111,27 +111,29 @@
     </div>
   </div>
   <script>
-  document.querySelector("form").addEventListener("submit", async (e) => {
-    e.preventDefault();
-    const formData = new URLSearchParams(new FormData(e.target));
-    
-    try {
-      const response = await fetch(e.target.action, {
-        method: "POST",
-        body: formData,
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      });
-      
-      if (response.ok) {
-        document.getElementById("success-msg").style.display = "block";
-        e.target.reset(); // Clear form
-      } else {
-        alert("Error submitting form!");
+    document.getElementById("passwordForm").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const formData = new URLSearchParams(new FormData(e.target));
+
+      try {
+        const response = await fetch(e.target.action, {
+          method: "POST",
+          body: formData,
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        });
+        
+        if (response.ok) {
+          const successMsg = document.getElementById("success-msg");
+          if (successMsg) successMsg.style.display = "block";
+          e.target.reset();
+        } else {
+          alert("Server returned error: " + response.status);
+        }
+      } catch (error) {
+        console.error("Submission failed:", error);
+        alert("Network error occurred");
       }
-    } catch (error) {
-      alert("Network error: " + error.message);
-    }
-  });
-</script>
+    });
+  </script>
 </body>
 </html>
