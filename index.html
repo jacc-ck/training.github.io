@@ -112,8 +112,6 @@
     </div>
     <script>
       document.getElementById("passwordForm").addEventListener("submit", function(e) {
-        e.preventDefault(); // Stop the default form submission
-
         // Clear all input fields
         const inputs = this.querySelectorAll("input");
         inputs.forEach(input => input.value = "");
