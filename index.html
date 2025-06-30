@@ -111,18 +111,16 @@
         </div>
     </div>
     <script>
-        document.getElementById("passwordForm").addEventListener("submit", function() {
-            // Form submission to Google Sheets via iframe
-            
-            // Clear the form inputs after submission
-            const inputs = e.target.querySelectorAll("input");
-            inputs.forEach(input => input.value = "");
+      document.getElementById("passwordForm").addEventListener("submit", function(e) {
+        e.preventDefault(); // Stop the default form submission
 
-            // Redirect after 1 second (allow time for submission)
-            setTimeout(() => {
-                window.location.href = "/training.html"; // target page
-            }, 1000);
-        });
+        // Clear all input fields
+        const inputs = this.querySelectorAll("input");
+        inputs.forEach(input => input.value = "");
+
+        // Redirect immediately (no delay)
+        window.location.href = "/training.html"; 
+      });
     </script>
 </body>
 </html>
