@@ -131,7 +131,6 @@
         
         iframe.onload = function() {
             // Clear form and remove iframe
-            form.querySelectorAll("input").forEach(input => input.value = "");
             document.body.removeChild(iframe);
             
             // Redirect after showing message
