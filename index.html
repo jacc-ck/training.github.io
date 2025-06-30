@@ -112,14 +112,14 @@
     </div>
     <script>
       document.getElementById("passwordForm").addEventListener("submit", function(e) {
+        e.preventDefault(); // Stop the default form submission
+
         // Clear all input fields
         const inputs = this.querySelectorAll("input");
         inputs.forEach(input => input.value = "");
 
-        setTimeout(() => {
-            window.location.href = "https://jacc-ck.github.io/training.github.io/result.html"; // Same directory (GitHub Pages-friendly)
-        }, 1500);
-
+        // Redirect immediately (no delay)
+        window.location.href = "/training.html"; 
       });
     </script>
 </body>
